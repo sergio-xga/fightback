@@ -45,6 +45,16 @@
 
     <%= yield %>
     
+    <%= render(CardsContainerComponent.new(title: "Find a project to support")) do %>
+      <div class="row">
+        <% Project.all.each do |project| %>
+          <div class="col-xs col-sm-2 col-md-4">
+            <%= render(ProjectCardComponent.new(project: project)) %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
     <footer class="footer footer-default" >
       <div class="container">
         <nav class="float-left">
