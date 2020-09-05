@@ -42,13 +42,30 @@
         </div>
       </div>
     </nav>
+    <% if controller_name == 'web_app' && action_name == 'landing' %>
+    <div class="page-header header-filter" data-parallax="true" style="background-image: url(<%= asset_path 'dr2.jpg' %>)">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 ml-auto mr-auto">
+            <div class="brand text-center">
+              <h1>it's about time</h1>
+              <h3 class="title text-center">to fight back...</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% else %>
+      <div class="page-header header-filter" data-parallax="true" style="height: 50vh; background-image: url(<%= @cover_img %>)">
+      </div>
+    <% end %>
 
     <%= yield %>
     
-    <%= render(CardsContainerComponent.new(title: "Find a project to support")) do %>
+    <%= render(CardsContainerComponent.new(title: "Find a#{controller_name == 'projects' && action_name == 'show' ? 'nother' : ''} project to support")) do %>
       <div class="row">
         <% Project.all.each do |project| %>
-          <div class="col-xs col-sm-2 col-md-4">
+          <div class="col-12 col-md-6 col-xl-4">
             <%= render(ProjectCardComponent.new(project: project)) %>
           </div>
         <% end %>
@@ -75,5 +92,6 @@
         </div>
       </div>
     </footer>
+    <% #console %>
   </body>
 </html>

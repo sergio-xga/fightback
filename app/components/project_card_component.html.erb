@@ -1,8 +1,9 @@
 <div class="card" style="width: 20rem;">
+  <img class="card-img-top" src="<%= @project.images.attached? ? url_for(@project.images.first) : (asset_path 'dr1.jpg') %>" rel="nofollow" alt="Card image cap">
   <div class="card-body">
     <h4 class="card-title"><%= @project.name %></h4>
     <h6 class="card-subtitle mb-2 text-muted"><%= @project.beneficiary %></h6>
     <p class="card-text"><%= @project.description %></p>
-    <a href="#" class="card-link">FightBack</a>
+    <%= link_to('FightBack', @project) %>
   </div>
 </div>

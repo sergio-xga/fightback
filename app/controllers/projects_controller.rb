@@ -10,6 +10,8 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
+    @cover_img = @project.images.attached? ? url_for(@project.images.first) : ActionController::Base.helpers.asset_path('dr1.jpg')
+    # @cover_img = 'dr1.jpg'
   end
 
   # GET /projects/new
