@@ -1,0 +1,15 @@
+<div class="row" style='padding-top: 25px'>
+  <div class="col-12"><h3><strong>Amount collected</strong></h3></div>
+  <div class="col-sm-6 ">$<%= @current_amount.to_i %></div>
+  <div class="col-sm-6"><span class="float-right">$<%= @goal.to_i %></span></div>
+</div>
+<div class="progress">
+  <div
+    class="progress-bar progress-bar-striped bg-info"
+    role="progressbar"
+    style="width: <%= (@current_amount * 100) / @goal%>%"
+    aria-valuenow="<%= @current_amount %>"
+    aria-valuemin="0"
+    aria-valuemax="<%= @goal %>">
+  </div>
+</div>
