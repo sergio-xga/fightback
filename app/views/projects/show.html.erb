@@ -22,7 +22,7 @@
   title: "Are you ready to make a change?",
   modal_id: "donateModal",
   confirm_button_text: "Donate",
-  confirm_button_action: "donate();",
+  confirm_button_id: "donate-btn",
   body_message: "Donate to #{@project.beneficiary}"
 )) do %>
   <div class="form-group">
@@ -40,12 +40,4 @@
   </div>
 <% end %>
 
-<script>
-// We'll move this later
-function donate() {
-  var clicked = confirm("Thanks for your donation! Together we FightBack!")
-  if (clicked){
-    $('#donateModal').modal('hide')
-  }
-}
-</script>
+<%= javascript_pack_tag 'projects' %>
