@@ -11,7 +11,7 @@
     beneficiary: Faker::University.prefix + ' ' + Faker::FunnyName.name + ' ' + Faker::University.suffix,
     project_owner_id: nil,
     description: Faker::Hipster.paragraph(sentence_count: 2, supplemental: true, random_sentences_to_add: 4),
-    goal_amount: Faker::Number.between(from: 1000, to: 1000000),
+    goal_amount: Faker::Number.between(from: 1000, to: 100000),
     goal_deadline: Faker::Date.forward(days: 365),
     project_status: 'active'
   )
@@ -31,5 +31,14 @@ Project.all.each do |project|
     )
     # SQLite3::BusyException: database is locked
     sleep 2
+  end
+  10.times do
+    t_statuses = ['in_transit','cancelled','complete', nil, nil]
+    Donation.create(
+      amount: Faker::Number.between(from: 10, to: 500),
+      payment_method: 'paypal',
+      project_id: project.id,
+      transaction_status: t_statuses[rand(5)] || 'complete'
+    )
   end
 end

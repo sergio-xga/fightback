@@ -3,7 +3,7 @@
   <div class="section" style="padding-top: 35px">
     <div class="container">
       <%= render(ProjectDescriptionComponent.new(project: @project)) %>
-      <%= render(ProgressBarComponent.new(goal: @project.goal_amount, current_amount: 7500.0)) %>
+      <%= render(ProgressBarComponent.new(goal: @project.goal_amount, current_amount: @project.donations.sum(:amount).to_f)) %>
       <button type="button" class="btn btn-info" data-toggle="modal" data-target="#donateModal">
       FightBack!
       </button>
