@@ -1,43 +1,59 @@
 <p id="notice"><%= notice %></p>
-<div class="main main-raised" style="margin: 0 30px 0 30px">
-  <div class="section" style="padding-top: 35px">
-    <div class="container">
-      <%= render(ProjectDescriptionComponent.new(project: @project)) %>
-      <%= render(ProgressBarComponent.new(goal: @project.goal_amount, current_amount: @project.donations.sum(:amount).to_f)) %>
-      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#donateModal">
-      FightBack!
-      </button>
+
+<div data-controller="donations">
+  <div class="main main-raised" style="margin: 0 30px 0 30px">
+    <div class="section" style="padding-top: 35px">
+      <div class="container">
+        <%= render(ProjectDescriptionComponent.new(project: @project)) %>
+        <div data-target="donations.progressBar">
+          <%= render(ProgressBarComponent.new(goal: @project.goal_amount, current_amount: @project.donations.sum(:amount).to_f)) %>
+        </div>
+        <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#donateModal">
+        FightBack!
+        </button>
+        <h3><strong>Last donations</strong></h3>
+          <div data-target="donations.table">
+            <%= render(SimpleTableComponent.new(
+              headers: ['Donator', 'Amount', 'Time'],
+              data: @project.donations.limit(5).map{|d| 
+                {
+                  "Donator" => 'Anonymous',
+                  "Amount" => d.amount.to_i,
+                  "Time" => d.created_at.to_formatted_s(:long_ordinal)
+                }
+              }
+            ))%>
+          </div>
+      </div>
+    </div>
+    <div class="section" style="padding-top: 35px">
+      <div class="container">
+        <% if @project.images.attached? %>
+          <%= render(ImagesCarouselComponent.new(images: @project.images)) %>
+        <% end %>
+      </div>
     </div>
   </div>
-  <div class="section" style="padding-top: 35px">
-    <div class="container">
-      <% if @project.images.attached? %>
-        <%= render(ImagesCarouselComponent.new(images: @project.images)) %>
-      <% end %>
+  <%= render(ModalComponent.new(
+    title: "Are you ready to make a change?",
+    modal_id: "donateModal",
+    confirm_button_text: "Donate",
+    confirm_data_action: "donations#addDonation",
+    confirm_button_id: "donate-btn",
+    body_message: "Donate to #{@project.beneficiary}"
+  )) do %>
+    <div class="form-group">
+      <label for="payment-method">Payment Method</label>
+      <select class="form-control" id="payment-method" aria-describedby="payment-method-help">
+      <option value="" disabled selected>Select your option</option>
+      <option value="paypal">PayPal</option>
+      <!-- <option>Credit Card</option> -->
+    </select>
+      <small id="payment-method-help" class="form-text text-muted">We are working to integrate more payment methods in the near future.</small>
     </div>
-  </div>
+    <div class="form-group">
+      <label for="amount">Amount (USD)</label>
+      <input data-target="donations.amount" type="number" min="1" step="any" value= 10 class="form-control" id="amount" placeholder="10">
+    </div>
+  <% end %>
 </div>
-
-<%= render(ModalComponent.new(
-  title: "Are you ready to make a change?",
-  modal_id: "donateModal",
-  confirm_button_text: "Donate",
-  confirm_button_id: "donate-btn",
-  body_message: "Donate to #{@project.beneficiary}"
-)) do %>
-  <div class="form-group">
-    <label for="payment-method">Payment Method</label>
-    <select class="form-control" id="payment-method" aria-describedby="payment-method-help">
-    <option value="" disabled selected>Select your option</option>
-    <option value="paypal">PayPal</option>
-    <!-- <option>Credit Card</option> -->
-  </select>
-    <small id="payment-method-help" class="form-text text-muted">We are working to integrate more payment methods in the near future.</small>
-  </div>
-  <div class="form-group">
-    <label for="amount">Amount (USD)</label>
-    <input type="number" min="1" step="any" value= 10 class="form-control" id="amount" placeholder="10">
-  </div>
-<% end %>
-
-<%= javascript_pack_tag 'projects' %>

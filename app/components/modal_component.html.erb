@@ -9,13 +9,12 @@
       </div>
       <div class="modal-body">
         <h4><%= @body_message %></h4>
-        <%= content %>
+          <%= content %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-info" id="<%= @confirm_button_id %>"><%= @confirm_button_text %></button>
+        <button type="button" class="btn btn-info" data-action="click-><%= @confirm_data_action %>" id="<%= @confirm_button_id %>"><%= @confirm_button_text %></button>
       </div>
-      
     </div>
   </div>
 </div>
