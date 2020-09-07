@@ -4,6 +4,6 @@
     <h4 class="card-title"><%= @project.name %></h4>
     <h6 class="card-subtitle mb-2 text-muted"><%= @project.beneficiary %></h6>
     <p class="card-text"><%= @project.description %></p>
-    <%= link_to('FightBack', @project) %>
+    <%= link_to('#FightBack', @project, class: 'btn btn-info btn-sm') %>
   </div>
 </div>
