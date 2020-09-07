@@ -14,6 +14,12 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-info" data-action="click-><%= @confirm_data_action %>" id="<%= @confirm_button_id %>"><%= @confirm_button_text %></button>
+        <div class="row d-none processing">
+          <div class="col-11">Processing your payment... Your donation will make the difference!</div>
+          <div class="col-1 d-flex justify-content-end align-items-end">
+            <i class="material-icons spin-load">more_horiz</i>
+          </div>
+        </div>
       </div>
     </div>
   </div>
