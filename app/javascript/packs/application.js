@@ -10,6 +10,8 @@ require("channels")
 
 import "bootstrap-material-design"
 import "material-kit/assets/js/material-kit"
+import moment from "moment/moment"
+window.moment = moment
 
 import "../stylesheets/application"
 
