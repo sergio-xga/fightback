@@ -29,12 +29,12 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 group :production do
   gem 'mysql2'
+  gem "aws-sdk-s3", require: false
 end
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem "rspec-rails"
-  gem "faker"
   gem 'sqlite3', '~> 1.4'
 end
 
@@ -59,3 +59,4 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "view_component"
+gem "faker"
