@@ -61,7 +61,7 @@
       </div>
     </div>
     <% else %>
-      <div class="page-header header-filter" data-parallax="true" style="height: 50vh; background-image: url(<%= @cover_img %>)">
+      <div class="page-header header-filter" data-parallax="true" style="height: <%= @vh ? @vh : 50 %>vh; background-image: url(<%= @cover_img %>)">
       </div>
     <% end %>
 

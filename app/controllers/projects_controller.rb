@@ -1,18 +1,15 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_cover_img, only: [:index, :show, :new, :edit]
   # GET /projects
   # GET /projects.json
   def index
     @projects = Project.all
-    @cover_img = ActionController::Base.helpers.asset_path('dr1.jpg')
   end
 
   # GET /projects/1
   # GET /projects/1.json
   def show
-    @cover_img = @project.images.attached? ? url_for(@project.images.first) : ActionController::Base.helpers.asset_path('dr1.jpg')
-    # @cover_img = 'dr1.jpg'
   end
 
   # GET /projects/new
@@ -66,6 +63,10 @@ class ProjectsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_cover_img
+      @cover_img = (@project && @project.images.attached?) ? url_for(@project.images.first) : ActionController::Base.helpers.asset_path('dr1.jpg')
+      @vh = 30
+    end
     def set_project
       @project = Project.find(params[:id])
     end
