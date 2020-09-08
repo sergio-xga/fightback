@@ -5,6 +5,7 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     @projects = Project.all
+    @cover_img = ActionController::Base.helpers.asset_path('dr1.jpg')
   end
 
   # GET /projects/1

@@ -12,6 +12,7 @@ import "bootstrap-material-design"
 import "material-kit/assets/js/material-kit"
 import moment from "moment/moment"
 window.moment = moment
+import "bootstrap-table"
 
 import "../stylesheets/application"
 

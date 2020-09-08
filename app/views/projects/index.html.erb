@@ -1,8 +1,34 @@
-<p id="notice"><%= notice %></p>
+<div class="main main-raised" style="margin: 0 30px 0 30px">
+  <div class="section" style="padding-top: 0px">
+    <div class="container">
+      <div class="title">
+        <div class="row">
+          <div class="col-6"><h2 class="title" style="margin-bottom:0px;">Projects</h2></div>
+          <div class="col-6 d-flex justify-content-end align-items-end">
+            <%= link_to 'New Project', new_project_path, class: 'btn btn-info' %>
+          </div>
+        </div>
+      </div>
+      <%= render 'layouts/partials/alerts' %>
+      <%= render(BootstrapTableComponent.new(
+        pagination: true,
+        search: true,
+        headers: [
+          {sortable: 'true', field: 'name', title: 'Name'},
+          {sortable: 'true', field: 'beneficiary', title: 'Beneficiary'},
+          {sortable: 'true', field: 'goal_amount', title: 'Amount'},
+          {sortable: 'true', field: 'goal_deadline', title: 'Deadline'},
+          {sortable: 'true', field: 'project_status', title: 'Status'},
+        ],
+        data: @projects.order(created_at: :desc)
+      ))%>
+    </div>
+  </div>
+</div>
 
-<h1>Projects</h1>
-
-<table>
+<%
+=begin%>
+ <table>
   <thead>
     <tr>
       <th>Name</th>
@@ -32,8 +58,6 @@
       </tr>
     <% end %>
   </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Project', new_project_path %>
+</table> 
+<%
+=end%>
