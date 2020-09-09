@@ -13,51 +13,17 @@
       <%= render(BootstrapTableComponent.new(
         pagination: true,
         search: true,
+        model: 'project',
         headers: [
           {sortable: 'true', field: 'name', title: 'Name'},
           {sortable: 'true', field: 'beneficiary', title: 'Beneficiary'},
           {sortable: 'true', field: 'goal_amount', title: 'Amount'},
           {sortable: 'true', field: 'goal_deadline', title: 'Deadline'},
           {sortable: 'true', field: 'project_status', title: 'Status'},
+          {field: 'action_links', title: 'Actions'}
         ],
         data: @projects.order(created_at: :desc)
       ))%>
     </div>
   </div>
 </div>
-
-<%
-=begin%>
- <table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Beneficiary</th>
-      <th>Project owner</th>
-      <th>Description</th>
-      <th>Goal amount</th>
-      <th>Goal deadline</th>
-      <th>Project status</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @projects.each do |project| %>
-      <tr>
-        <td><%= project.name %></td>
-        <td><%= project.beneficiary %></td>
-        <td><%= project.project_owner_id %></td>
-        <td><%= project.description %></td>
-        <td><%= project.goal_amount %></td>
-        <td><%= project.goal_deadline %></td>
-        <td><%= project.project_status %></td>
-        <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table> 
-<%
-=end%>

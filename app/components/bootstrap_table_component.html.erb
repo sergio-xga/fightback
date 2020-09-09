@@ -15,7 +15,14 @@
       <% @data.each do |d| %>
         <tr>
           <% @headers.each do |h| %>
-            <td><%= d[h[:field]] %></td>
+            <% if h[:field] == 'action_links' %>
+              <td>
+                <%= link_to("<i class='material-icons'>create</i>".html_safe, send("edit_#{@model}_path", d), class: 'btn btn-primary btn-sm') %>
+                <%= link_to("<i class='material-icons'>delete</i>".html_safe, d, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm') %>
+              </td>
+            <% else %>
+              <td><%= d[h[:field]] %></td>
+            <% end %>
           <% end %>
         </tr>
       <% end %>

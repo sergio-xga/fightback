@@ -11,7 +11,6 @@ export default class extends Controller {
     let projectId = this.projectIdTarget.value
     let paymentMethod = this.paymentMethodTarget.value
     console.log(amount,projectId,paymentMethod)
-    alert('Thanks for fighting back COVID19')
 
     loader('start')
     $.ajax({

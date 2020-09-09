@@ -1,9 +1,8 @@
-<p id="notice"><%= notice %></p>
-
 <div data-controller="donations">
   <div class="main main-raised" style="margin: 0 30px 0 30px">
     <div class="section" style="padding-top: 35px">
       <div class="container">
+        <%= render 'layouts/partials/alerts' %>
         <%= render(ProjectDescriptionComponent.new(project: @project)) %>
         <div data-target="donations.progressBar">
           <%= render(ProgressBarComponent.new(goal: @project.goal_amount, current_amount: @project.donations.sum(:amount).to_f)) %>
