@@ -37,13 +37,21 @@
             <li class="nav-item">
               <%= link_to 'Projects', projects_path, class: 'nav-link', style: 'padding-bottom: 10px' %>
             </li>
+            <%= render 'layouts/partials/alerts' %>
           </ul>
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a href="#" class="nav-link" style='padding-bottom: 10px'>
-                <i class="material-icons">login</i> Login
-              </a>
-            </li>
+            <% if logged_in? %>
+              <li class="nav-item">
+                <%= current_user.user_name %>
+              </li>
+              <li class="nav-item">
+                <%= link_to("<i class='material-icons'>login</i> Logout".html_safe, "/logout", method: :delete, class: "nav-link", style: "padding-bottom: 10px") %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to("<i class='material-icons'>login</i> Login".html_safe, "/auth/google_oauth2", class: "nav-link", style: "padding-bottom: 10px") %>
+              </li>
+            <% end %>
           </ul>
         </div>
       </div>
@@ -98,6 +106,6 @@
         </div>
       </div>
     </footer>
-    <% #console %>
+    <% console if Rails.env == "development" %>
   </body>
 </html>

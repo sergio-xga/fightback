@@ -1,4 +1,4 @@
-class DonationsController < ApplicationController
+class DonationsController < WebAppController
   before_action :get_project
 
   def create

@@ -1,6 +1,11 @@
-class ProjectsController < ApplicationController
+class ProjectsController < WebAppController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   before_action :set_cover_img, only: [:index, :show, :new, :edit]
+  
+  # Include Login methods
+  include WebAppHelper
+  before_action :require_login, only: [:index, :new, :edit, :update, :destroy]
+
   # GET /projects
   # GET /projects.json
   def index
