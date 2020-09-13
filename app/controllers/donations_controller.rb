@@ -3,9 +3,14 @@ class DonationsController < WebAppController
 
   def create
     sleep 5 # To simulate a real transaction
-    @donation = @project.donations.create(donation_params)
+    @donation = @project.donations.new(donation_params)
+    @donation.user = current_user if logged_in? # Otherwise it will be an anonymous donation
     respond_to do |format|
-      format.json { render json: {donation: @donation,current_amount: @project.donations.sum(:amount)} }
+      if @donation.save
+        format.json { render json: {donation: @donation, user: current_user, current_amount: @project.donations.sum(:amount)} }
+      else
+        format.json { render json: @donation.errors, status: :unprocessable_entity }
+      end
     end
   end
   
@@ -14,6 +19,6 @@ class DonationsController < WebAppController
     @project = Project.find(params[:project_id])
   end
   def donation_params
-    params.require(:donation).permit(:amount, :payment_method, :project_id, :transaction_status, :user_id)
+    params.require(:donation).permit(:amount, :payment_method, :project_id, :transaction_status)
   end
 end

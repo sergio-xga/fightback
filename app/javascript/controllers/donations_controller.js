@@ -24,7 +24,7 @@ export default class extends Controller {
       },
       success: (data)=>{
         console.log(data)
-        updateDonationsTable(this.tableTarget, {user:'Anonymous',amount:amount,time:data.donation.created_at})
+        updateDonationsTable(this.tableTarget, {user: data.user.user_name, amount:amount,time:data.donation.created_at})
         updateProgressBar(this.progressBarTarget, parseFloat(amount))
       },
       complete: ()=>{
@@ -63,7 +63,7 @@ function updateProgressBar(barTarget,amount,newAmount=null){
   var percent = (newAmount*100)/parseFloat(bar.attr('aria-valuemax'))
   bar.attr('aria-valuenow', newAmount.toString())
   bar.attr('style', `width: ${percent}%`)
-  $(barTarget).find('.row>.current').html('$'+newAmount)
+  $(barTarget).find('.row>.current').html('$'+newAmount.toFixed(2))
 }
 function updateDonationsTable(tableTarget, rowdata){
   $(tableTarget).find('table>tbody').prepend(`<tr>

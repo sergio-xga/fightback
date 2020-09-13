@@ -2,8 +2,6 @@ class ProjectsController < WebAppController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   before_action :set_cover_img, only: [:index, :show, :new, :edit]
   
-  # Include Login methods
-  include WebAppHelper
   before_action :require_login, only: [:index, :new, :edit, :update, :destroy]
 
   # GET /projects
@@ -30,6 +28,7 @@ class ProjectsController < WebAppController
   # POST /projects.json
   def create
     @project = Project.new(project_params)
+    @project.owner = current_user
 
     respond_to do |format|
       if @project.save
@@ -78,6 +77,6 @@ class ProjectsController < WebAppController
 
     # Only allow a list of trusted parameters through.
     def project_params
-      params.require(:project).permit(:name, :beneficiary, :project_owner_id, :description, :goal_amount, :goal_deadline, :project_status)
+      params.require(:project).permit(:name, :beneficiary, :description, :goal_amount, :goal_deadline, :project_status)
     end
 end

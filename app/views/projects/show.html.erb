@@ -14,9 +14,9 @@
           <div data-target="donations.table">
             <%= render(SimpleTableComponent.new(
               headers: ['Donator', 'Amount', 'Time'],
-              data: @project.donations.order(created_at: :desc).limit(5).map{|d| 
+              data: @project.donations.includes(:user).order(created_at: :desc).limit(5).map{|d| 
                 {
-                  "Donator" => 'Anonymous',
+                  "Donator" => d.user ? d.user.user_name : 'Anonymous',
                   "Amount" => d.amount.to_i,
                   "Time" => d.created_at.to_formatted_s(:long_ordinal)
                 }
