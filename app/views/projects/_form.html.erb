@@ -1,3 +1,4 @@
+<div data-controller="projects">
 <%= form_with(model: project, local: true) do |form| %>
   <% if project.errors.any? %>
     <div id="error_explanation">
@@ -45,3 +46,4 @@
     <%= form.submit 'Save', class: "btn btn-info" %>
   </div>
 <% end %>
+</div>

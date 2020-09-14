@@ -13,6 +13,7 @@ import "material-kit/assets/js/material-kit"
 import moment from "moment/moment"
 window.moment = moment
 import "bootstrap-table"
+import "material-kit/assets/js/plugins/bootstrap-datetimepicker"
 
 import "../stylesheets/application"
 
